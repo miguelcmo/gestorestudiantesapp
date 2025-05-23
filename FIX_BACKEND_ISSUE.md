@@ -1,7 +1,13 @@
-1 step
-Modificar App.js para asegurarnos de que el estudiante se agregue a la tabla solo cuando el backend responda
 
-// ...existing code...
+# Guía para integrar frontend y backend
+
+## 1. Modificar `App.js`
+
+Asegúrate de que el estudiante se agregue a la tabla **solo cuando el backend responda correctamente**:
+
+```js
+// ...código existente...
+
 const agregarEstudiante = async (nuevoEstudiante) => {
   setLoading(true);
   try {
@@ -19,13 +25,23 @@ const agregarEstudiante = async (nuevoEstudiante) => {
     setLoading(false);
   }
 };
-// ...existing code...
 
-2 step
-Se obtiene el aerror "NetworkError when attempting to fetch resource." esto se debe a que se espera que el backend reponda en el puerto 3030 pero este no se ha inicializado por lo que se debe crear un servidor de backend primero.
+// ...código existente...
+```
 
-Se crea el archivo server.js en la raiz del proyecto.
+---
 
+## 2. Crear el servidor backend (`server.js`)
+
+Si al ejecutar el frontend aparece el error:
+
+> `NetworkError when attempting to fetch resource.`
+
+Esto ocurre porque el backend aún **no está corriendo** en el puerto `3030`.
+
+### Solución: crear `server.js` en la raíz del proyecto
+
+```js
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -59,26 +75,36 @@ app.delete('/api/estudiantes/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Backend escuchando en http://localhost:${PORT}`);
 });
+```
 
+---
 
-3 step
-instalar cors
+## 3. Instalar dependencias del backend
 
+```bash
 npm install express cors
+```
 
-4 step
-se debe arrancar el backend y el frontend al tiempo
+---
 
-instalar concurrently
+## 4. Ejecutar backend y frontend simultáneamente
 
+### Instalar `concurrently`:
+
+```bash
 npm install concurrently --save-dev
+```
 
-modificar package.json con:
+### Modificar el `package.json`:
 
+```json
 "scripts": {
   "start": "concurrently \"node server.js\" \"react-scripts start\""
 }
+```
 
-y arrancar los servidores
+### Iniciar ambos servidores:
 
+```bash
 npm start
+```
