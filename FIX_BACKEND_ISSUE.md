@@ -3,7 +3,7 @@
 
 ## 1. Modificar `App.js`
 
-Asegúrate de que el estudiante se agregue a la tabla **solo cuando el backend responda correctamente**:
+Hay que asegurar que el estudiante se agregue a la tabla **solo cuando el backend responda correctamente**:
 
 ```js
 // ...código existente...
@@ -33,7 +33,7 @@ const agregarEstudiante = async (nuevoEstudiante) => {
 
 ## 2. Crear el servidor backend (`server.js`)
 
-Si al ejecutar el frontend aparece el error:
+Luego aparece el siguiente error:
 
 > `NetworkError when attempting to fetch resource.`
 
